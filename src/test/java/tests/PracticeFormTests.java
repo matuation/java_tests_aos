@@ -43,11 +43,12 @@ public class PracticeFormTests extends TestBase {
         .setLastName("Macshnacnecs")
         .setGenderRadio("Other")
         .setUserNumber("1234567890")
+        .setDateOfBirth("20", "July", "1991")
         .confirm()
         .checkResult("Student Name", "Sven Macshnacnecs")
         .checkResult("Gender", "Other")
         .checkResult("Mobile", "1234567890")
-        .checkResult("Date of Birth", "10 December,2025");
+        .checkResult("Date of Birth", "20 July,1991");
 
         }
 

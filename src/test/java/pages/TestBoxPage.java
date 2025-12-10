@@ -1,19 +1,19 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import pages.components.CheckResultComponent;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class TestBoxPage {
-    private SelenideElement fullNameInput = $("#userName"),
+
+    private final SelenideElement fullNameInput = $("#userName"),
             emailInput = $("#userEmail"),
             currentAddressInpur = $("#currentAddress"),
             permanentAddressInput = $("#permanentAddress"),
-            confirmLocator = $("#submit"),
-            resultTable =  $("#output");
-
+            confirmLocator = $("#submit");
+    CheckResultComponent checkResultComponent = new CheckResultComponent();
     public TestBoxPage openPage() { //метод для открытия тестируемой страницы
         open("text-box");
         executeJavaScript("$('#fixedban').remove()");
@@ -53,7 +53,8 @@ public TestBoxPage setFullName(String value) { //метод для имени
     }
 
     public TestBoxPage checkResult(String key, String value) { //метод для провери результирующей таблицы
-        resultTable.shouldHave(text(key)).parent().shouldHave(text(value));
+
+        checkResultComponent.checkOutputResultValues(key, value);
 
         return this;
     }

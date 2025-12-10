@@ -2,13 +2,14 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.CheckResultComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormPage { //класс объектов страницы automation-practice-form
-    private SelenideElement firstNameInput = $("#firstName"), //создаем переменные для хранения локаторов
+    private final SelenideElement firstNameInput = $("#firstName"), //создаем переменные для хранения локаторов
      lastNameInput = $("#lastName"),
      userEmailInput = $("#userEmail"),
      userGenderSelect = $("#genterWrapper"),
@@ -22,11 +23,11 @@ public class PracticeFormPage { //класс объектов страницы a
      userCityListInput = $("#city"),
      userStateCityListInput = $(".css-26l3qy-menu"),
      confirmLocator =  $("#submit"),
-     resultTable = $(".table"),
      page = $("#app");
 
 
     CalendarComponent calendarComponent = new CalendarComponent(); //создаем новый объект типа CalendarComponent для использования в методе выбора объекта типа календарь
+    CheckResultComponent checkResultComponent = new CheckResultComponent();
 
     public PracticeFormPage openPage() { //метод для открытия тестируемой страницы
         open("automation-practice-form");
@@ -118,7 +119,7 @@ public class PracticeFormPage { //класс объектов страницы a
     }
 
     public PracticeFormPage checkResult(String key, String value) { //метод для провери результирующей таблицы
-        resultTable.shouldHave(text(key)).parent().shouldHave(text(value));
+        checkResultComponent.checkTableResultValues(key, value);
 
         return this;
     }
