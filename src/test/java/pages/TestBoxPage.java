@@ -16,13 +16,18 @@ public class TestBoxPage {
     CheckResultComponent checkResultComponent = new CheckResultComponent();
     public TestBoxPage openPage() { //метод для открытия тестируемой страницы
         open("text-box");
+
+        return this;
+    }
+
+    public TestBoxPage closeBanners() { //метод для открытия тестируемой страницы
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
         return this;
     }
 
-public TestBoxPage setFullName(String value) { //метод для имени
+    public TestBoxPage setFullName(String value) { //метод для имени
     fullNameInput.setValue(value);
 
     return this;

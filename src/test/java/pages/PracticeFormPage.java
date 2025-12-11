@@ -31,6 +31,11 @@ public class PracticeFormPage { //класс объектов страницы a
 
     public PracticeFormPage openPage() { //метод для открытия тестируемой страницы
         open("automation-practice-form");
+
+        return this;
+    }
+
+    public PracticeFormPage closeBanners() { //метод для открытия тестируемой страницы
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
