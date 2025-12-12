@@ -25,6 +25,8 @@ public class PracticeFormPage { //класс объектов страницы a
      confirmLocator =  $("#submit"),
      page = $("#app");
 
+     public static String submitMessage = "Thanks for submitting the form";
+
 
     CalendarComponent calendarComponent = new CalendarComponent(); //создаем новый объект типа CalendarComponent для использования в методе выбора объекта типа календарь
     CheckResultComponent checkResultComponent = new CheckResultComponent();

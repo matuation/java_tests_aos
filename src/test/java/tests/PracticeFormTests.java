@@ -2,7 +2,12 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
+
+import static pages.PracticeFormPage.submitMessage;
 import static tests.RandomTestData.*;
+
+import tests.RandomTestData.*;
+
 
 public class PracticeFormTests extends TestBase {
 
@@ -15,28 +20,28 @@ public class PracticeFormTests extends TestBase {
                 .setFirstName(userFirstName)
                 .setLastName(userLastName)
                 .setEmail(userEmail)
-                .setGenderRadio("Other")
+                .setGenderRadio(userGender)
                 .setUserNumber(userNumber)
-                .setDateOfBirth("20", "July", "1991")
-                .setSubject("Accounting")
-                .setHobbies("Reading")
-                .setHobbies("Music")
-                .setUserPicture("sample.png")
-                .setUserCurrentAddress("1835 73rd Ave NE, Medina, WA 98039, USA")
-                .setUserState("Uttar Pradesh")
-                .setUserCity("Merrut")
+                .setDateOfBirth(userDayOfBirth, userMonthOfBirth, userYearOfBirth)
+                .setSubject(userSubject)
+                .setHobbies(userHobby1)
+                .setHobbies(userHobby2)
+                .setUserPicture(userPicture)
+                .setUserCurrentAddress(userCurrentAddress)
+                .setUserState(userState)
+                .setUserCity(userCity)
                 .confirm()
                 //проверяем итоговую таблицу
                 .checkResult("Student Name", userFirstName + " " + userLastName)
                 .checkResult("Student Email", userEmail)
-                .checkResult("Gender", "Other")
+                .checkResult("Gender", userGender)
                 .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", "20 July,1991")
-                .checkResult("Subjects", "Accounting")
-                .checkResult("Hobbies", "Reading, Music")
-                .checkResult("Picture", "sample.png")
-                .checkResult("Address", "1835 73rd Ave NE, Medina, WA 98039, USA")
-                .checkResult("State and City", "Uttar Pradesh Merrut");
+                .checkResult("Date of Birth", userDayOfBirth + " " + userMonthOfBirth +  "," + userYearOfBirth)
+                .checkResult("Subjects", userSubject)
+                .checkResult("Hobbies", userHobby1 + ", " + userHobby2)
+                .checkResult("Picture", userPicture)
+                .checkResult("Address", userCurrentAddress)
+                .checkResult("State and City", userState + " " + userCity);
     }
     @Test
     void successfulMinFormFillTest(){
@@ -44,14 +49,14 @@ public class PracticeFormTests extends TestBase {
                 .closeBanners()
                 .setFirstName(userFirstName)
                 .setLastName(userLastName)
-                .setGenderRadio("Other")
+                .setGenderRadio(userGender)
                 .setUserNumber(userNumber)
-                .setDateOfBirth("20", "July", "1991")
+                .setDateOfBirth(userDayOfBirth, userMonthOfBirth, userYearOfBirth)
                 .confirm()
                 .checkResult("Student Name", userFirstName + " " + userLastName)
-                .checkResult("Gender", "Other")
+                .checkResult("Gender", userGender)
                 .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", "20 July,1991");
+                .checkResult("Date of Birth", userDayOfBirth + " " + userMonthOfBirth +  "," + userYearOfBirth);
 
         }
 
@@ -60,7 +65,7 @@ public class PracticeFormTests extends TestBase {
         practiceFormPage.openPage()
                 .closeBanners()
                 .confirm()
-                .checkNegativeResult("Thanks for submitting the form");
+                .checkNegativeResult(submitMessage);
 
     }
 }
