@@ -1,6 +1,5 @@
 package utils;
 
-import com.github.javafaker.Faker;
 import tests.RandomTestData;
 
 import java.util.concurrent.ThreadLocalRandom;
