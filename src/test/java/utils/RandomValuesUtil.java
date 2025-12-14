@@ -169,11 +169,11 @@ public class RandomValuesUtil extends RandomTestData {
     public static final String getRandomHobby2() {
         String randomHobby2 = "";
         String selectedHobby = userHobby;
-        String[] hobbies = {"Sports", "Reading", "Music"};
-        if ((!selectedHobby.equals(hobbies[2]))) {
-            randomHobby2 = hobbies[2];
+        //String[] hobbies = {"Sports", "Reading", "Music"};
+        if ((!selectedHobby.equals("Music"))) {
+            randomHobby2 = "Music";
         } else {
-            randomHobby2 = hobbies[getRandomInt(0, 1)];
+            randomHobby2 = faker.options().option("Sports", "Reading");
         }
 
         return randomHobby2;
@@ -196,6 +196,7 @@ public class RandomValuesUtil extends RandomTestData {
 
         return randomState;
     }
+
     public static String userStates = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
 
     static RandomValuesUtil randomValuesUtilS = new RandomValuesUtil();
