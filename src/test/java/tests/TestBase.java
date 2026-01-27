@@ -24,11 +24,8 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        //Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com/";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
-        //Configuration.timeout = 5000; // default 4000
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
