@@ -74,7 +74,7 @@ public class PracticeFormPage { //класс объектов страницы a
 
         return this;
     }
-    @Step("Ввести дату рождения {value}")
+    @Step("Ввести дату рождения {day} {month} {year}")
     public PracticeFormPage setDateOfBirth(String day, String month, String year) { //метод для дня рождения
         calendarInput.click();
         calendarComponent.setDate(day, month, year);
