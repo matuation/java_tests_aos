@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.TestBoxPage;
 
@@ -13,6 +14,7 @@ public class TextBoxTests extends TestBase {
 
 
     @Test
+    @DisplayName("Успешная отправка формы")
     void fillFormTest() {
 
         testBoxPage.openPage()

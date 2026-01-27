@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 
@@ -14,6 +15,7 @@ public class PracticeFormTests extends TestBase {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
     @Test
+    @DisplayName("Успешная регистрация с заполнением всех полей")
     void successfulFormFillTest(){
         practiceFormPage.openPage() // открываем форму и заполняем форму
                 .closeBanners()
@@ -44,6 +46,7 @@ public class PracticeFormTests extends TestBase {
                 .checkResult("State and City", userState + " " + userCity);
     }
     @Test
+    @DisplayName("Успешная регистрация с заполнением минимума полей")
     void successfulMinFormFillTest(){
         practiceFormPage.openPage()
                 .closeBanners()
@@ -61,6 +64,7 @@ public class PracticeFormTests extends TestBase {
         }
 
     @Test
+    @DisplayName("Ошибка регистрации при отправке формы с пустыми полями")
     void NegativeFormFillTest(){
         practiceFormPage.openPage()
                 .closeBanners()
