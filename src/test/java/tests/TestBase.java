@@ -26,8 +26,8 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        if ((buildParam.remoteBaseCreds != null) && (buildParam.remoteBaseUrl != null)) {
-            Configuration.remote = buildParam.remoteBaseCreds + buildParam.remoteBaseUrl;
+        if (buildParam.remoteBaseUrl != null) {
+            Configuration.remote = "https://" + buildParam.remoteBaseUsername + ":" + buildParam.remoteBasePass + "@" + buildParam.remoteBaseUrl;
         }
         Configuration.baseUrl = buildParam.baseUrl;
         Configuration.browser = buildParam.browser;
