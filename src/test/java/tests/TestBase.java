@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-    static BuildParameters buildParam = new BuildParameters();
+    public static BuildParameters buildParam = new BuildParameters();
 
     @BeforeEach
     void addListener() {
