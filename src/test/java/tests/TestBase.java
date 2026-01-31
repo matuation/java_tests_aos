@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.BuildParameters;
 import helpers.Attachments;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -16,6 +17,8 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
+    static BuildParameters buildParam = new BuildParameters();
+
     @BeforeEach
     void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
@@ -23,17 +26,22 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        Configuration.baseUrl = "https://demoqa.com/";
-        Configuration.pageLoadStrategy = "eager";
+        if ((buildParam.remoteBaseCreds != null) && (buildParam.remoteBaseUrl != null)) {
+            Configuration.remote = buildParam.remoteBaseCreds + buildParam.remoteBaseUrl;
+        }
+        Configuration.baseUrl = buildParam.baseUrl;
+        Configuration.browser = buildParam.browser;
+        Configuration.browserVersion = buildParam.browserVersion;
+        Configuration.headless = Boolean.parseBoolean(buildParam.isHeadless);
+        Configuration.browserSize = buildParam.browserSize;
+        Configuration.pageLoadStrategy = buildParam.pageLoadStrat;
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-    }
+        }
 
     @AfterEach
     void addAttachments() {
