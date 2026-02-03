@@ -2,22 +2,27 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import config.BuildParameters;
 import helpers.Attachments;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import pages.PracticeFormPage;
 
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
+    public static String browser = System.getProperty("browser", "chrome");
+    public static String browserVersion = System.getProperty("browserVersion");
+    public static String baseUrl = System.getProperty("baseUrl", "https://demoqa.com/");
+    public static String remoteBaseUsername = System.getProperty("remoteBaseUsername");
+    public static String remoteBasePass = System.getProperty("remoteBasePass");
+    public static String remoteBaseUrl = System.getProperty("remoteBaseUrl");
+    public static String browserSize = System.getProperty("browserSize", "1920x1080");
+    public static String pageLoadStrat = System.getProperty("pageLoadStrat", "eager");
 
-    public static BuildParameters buildParam = new BuildParameters();
 
     @BeforeEach
     void addListener() {
@@ -26,22 +31,21 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        if (buildParam.remoteBaseUrl != null) {
-            Configuration.remote = "https://" + buildParam.remoteBaseUsername + ":" + buildParam.remoteBasePass + "@" + buildParam.remoteBaseUrl;
+        if (remoteBaseUrl != null) {
+            Configuration.remote = "https://" + remoteBaseUsername + ":" + remoteBasePass + "@" + remoteBaseUrl;
         }
-        Configuration.baseUrl = buildParam.baseUrl;
-        Configuration.browser = buildParam.browser;
-        Configuration.browserVersion = buildParam.browserVersion;
-        Configuration.headless = Boolean.parseBoolean(buildParam.isHeadless);
-        Configuration.browserSize = buildParam.browserSize;
-        Configuration.pageLoadStrategy = buildParam.pageLoadStrat;
+        Configuration.baseUrl = baseUrl;
+        Configuration.browser = browser;
+        Configuration.browserVersion = browserVersion;
+        Configuration.browserSize = browserSize;
+        Configuration.pageLoadStrategy = pageLoadStrat;
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        }
+    }
 
     @AfterEach
     void addAttachments() {

@@ -12,7 +12,6 @@ public class TextBoxTests extends TestBase {
     TestBoxPage testBoxPage = new TestBoxPage();
 
 
-
     @Test
     @DisplayName("Успешная отправка формы")
     void fillFormTest() {
